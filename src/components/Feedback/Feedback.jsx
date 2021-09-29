@@ -1,4 +1,6 @@
 import React from 'react';
+import Statistics from '../Statistics/Statistics';
+import Notification from '../Notification/Notification';
 import s from './Feedback.module.css';
 
 class Feedback extends React.Component {
@@ -60,31 +62,18 @@ class Feedback extends React.Component {
             Bad
           </button>
         </div>
-        <ul className="statistics">
-          <p className="title">Statistics</p>
-          <li className="item">
-            <span className={s.label}>Good:</span>
-            <span className={s.value}>{this.state.good}</span>
-          </li>
-          <li className="item">
-            <span className={s.label}>Neutral:</span>
-            <span className={s.value}>{this.state.neutral}</span>
-          </li>
-          <li className="item">
-            <span className={s.label}>Bad:</span>
-            <span className={s.value}>{this.state.bad}</span>
-          </li>
-          <li className="item">
-            <span className={s.label}>Total:</span>
-            <span className={s.value}>{this.countTotalFeedback()}</span>
-          </li>
-          <li className="item">
-            <span className={s.label}>Positive Feedback:</span>
-            <span className={s.value}>
-              {this.countPositiveFeedbackPercentage()}%
-            </span>
-          </li>
-        </ul>
+        <p className="title">Statistics</p>
+        {this.countTotalFeedback() > 0 ? (
+          <Statistics
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          />
+        ) : (
+          <Notification message="No feedback is given" />
+        )}
       </div>
     );
   }
