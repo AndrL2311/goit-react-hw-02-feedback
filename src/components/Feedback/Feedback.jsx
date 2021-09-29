@@ -1,6 +1,7 @@
 import React from 'react';
 import Statistics from '../Statistics/Statistics';
 import Notification from '../Notification/Notification';
+import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
 import s from './Feedback.module.css';
 
 class Feedback extends React.Component {
@@ -44,10 +45,14 @@ class Feedback extends React.Component {
   }
 
   render() {
+    //Преобразуем ключи объекта в масив
+    const options = Object.keys(this.state);
+
     return (
       <div className={s.container}>
         <p className="title">Please leave feedback</p>
-        <div className={s.controls}>
+        <FeedbackOptions options={options} onLeaveFeedback={this.onClickGood} />
+        {/* <div className={s.controls}>
           <button className={s.button} type="button" onClick={this.onClickGood}>
             Good
           </button>
@@ -61,7 +66,7 @@ class Feedback extends React.Component {
           <button className={s.button} type="button" onClick={this.onClickBad}>
             Bad
           </button>
-        </div>
+        </div> */}
         <p className="title">Statistics</p>
         {this.countTotalFeedback() > 0 ? (
           <Statistics
