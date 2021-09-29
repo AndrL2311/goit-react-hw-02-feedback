@@ -5,36 +5,49 @@ import FeedbackOptions from '../FeedbackOptions/FeedbackOptions';
 import s from './Feedback.module.css';
 
 class Feedback extends React.Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
+  constructor() {
+    super();
 
-  onClickGood = event => {
+    this.onLeaveFeedback = this.onLeaveFeedback.bind(this);
+
+    this.state = {
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    };
+    //Преобразуем ключи объекта в масив
+    this.options = Object.keys(this.state);
+  }
+
+  onLeaveFeedback(event) {
+    const name = event.target.textContent;
     this.setState(prevState => {
       return {
-        good: prevState.good + 1,
+        [name]: prevState[name] + 1,
       };
     });
-  };
-  onClickNeutral = event => {
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
-  onClickBad = event => {
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
-  };
+  }
+  // Єти коментарии чтоб я не забыл как я делал
+  // onLeaveFeedback = event => {
+  //  const name = event.target.textContent;
+  //   this.setState(prevState => {
+  //     return {
+  //       [name]: prevState[name] + 1,
+  //     };
+  //   });
+  // };
+
+  // onClickGood = event => {
+  //   this.setState(prevState => {
+  //     return {
+  //       good: prevState.good + 1,
+  //     };
+  //   });
+  // };
 
   countTotalFeedback() {
-    return this.state.good + this.state.neutral + this.state.bad;
+    // return this.state.good + this.state.neutral + this.state.bad;
+    return this.options.reduce((acc, option) => acc + this.state[option], 0);
   }
 
   countPositiveFeedbackPercentage() {
@@ -45,13 +58,13 @@ class Feedback extends React.Component {
   }
 
   render() {
-    //Преобразуем ключи объекта в масив
-    const options = Object.keys(this.state);
-
     return (
       <div className={s.container}>
         <p className="title">Please leave feedback</p>
-        <FeedbackOptions options={options} onLeaveFeedback={this.onClickGood} />
+        <FeedbackOptions
+          options={this.options}
+          onLeaveFeedback={this.onLeaveFeedback}
+        />
         {/* <div className={s.controls}>
           <button className={s.button} type="button" onClick={this.onClickGood}>
             Good
