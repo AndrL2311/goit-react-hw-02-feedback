@@ -28,7 +28,7 @@ class Feedback extends React.Component {
       };
     });
   }
-  // Єти коментарии чтоб я не забыл как я делал
+  // Эти коментарии чтоб я не забыл как я делал
   // onLeaveFeedback = event => {
   //  const name = event.target.textContent;
   //   this.setState(prevState => {
