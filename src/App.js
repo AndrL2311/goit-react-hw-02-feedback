@@ -20,28 +20,18 @@ class App extends React.Component {
     this.options = Object.keys(this.state);
   }
 
-  onLeaveFeedback(event) {
-    const name = event.target.textContent;
+  onLeaveFeedback(name) {
     this.setState(prevState => {
       return {
         [name]: prevState[name] + 1,
       };
     });
   }
-  // Эти коментарии чтоб я не забыл как я делал
-  // onLeaveFeedback = event => {
-  //  const name = event.target.textContent;
+  //
+  // onLeaveFeedback = name => {
   //   this.setState(prevState => {
   //     return {
   //       [name]: prevState[name] + 1,
-  //     };
-  //   });
-  // };
-
-  // onClickGood = event => {
-  //   this.setState(prevState => {
-  //     return {
-  //       good: prevState.good + 1,
   //     };
   //   });
   // };
