@@ -27,7 +27,7 @@ class App extends React.Component {
       };
     });
   }
-  //
+  // Та же функция только через стрелку
   // onLeaveFeedback = name => {
   //   this.setState(prevState => {
   //     return {
